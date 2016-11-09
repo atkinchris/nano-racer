@@ -16,7 +16,7 @@ module.exports = {
   output: {
     path: paths.DEST,
     filename: '[name].[hash].js',
-    publicPath: '/',
+    publicPath: './',
   },
   plugins: [
     new HtmlWebpackPlugin({ template: 'src/index.html' }),
