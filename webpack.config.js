@@ -2,7 +2,7 @@
 const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { loaders, alias } = require('./utils/phaser-shim')
+const { loaders, alias, noParse } = require('./utils/phaser-shim')
 
 const paths = {
   SRC: path.resolve(__dirname, 'src'),
@@ -24,6 +24,7 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
   ],
   module: {
+    noParse,
     loaders: [
       ...loaders,
       { test: /\.js$/, loader: 'babel', include: paths.SRC },

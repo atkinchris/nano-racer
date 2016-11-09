@@ -9,8 +9,10 @@ const loaders = [
 ]
 
 const alias = { phaser, pixi, p2 }
+const noParse = [pixi, p2]
 
 module.exports = {
   alias,
   loaders,
+  noParse,
 }
