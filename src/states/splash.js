@@ -1,4 +1,4 @@
-import Phaser from 'phaser'
+import Phaser from 'phaser-ce'
 
 class Splash extends Phaser.State {
   init() {
