@@ -38,6 +38,10 @@ class GameState extends Phaser.State {
     if (this.bird.y < 0 || this.bird.y > 490) {
       this.restartGame()
     }
+
+    if (this.bird.angle < 20) {
+      this.bird.angle += 1
+    }
   }
 
   render() {
@@ -46,6 +50,8 @@ class GameState extends Phaser.State {
 
   jump() {
     this.bird.body.velocity.y = -280
+
+    this.game.add.tween(this.bird).to({ angle: -20 }, 100).start()
   }
 
   restartGame() {
