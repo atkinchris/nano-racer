@@ -1,13 +1,16 @@
 import Phaser from 'phaser-ce'
 
 import SplashState from '../states/splash'
+import GameState from '../states/game'
 
 class Game extends Phaser.Game {
   constructor(component) {
-    super(768, 1024, Phaser.AUTO, component, null)
+    super(400, 490, Phaser.AUTO, component, null)
 
-    this.state.add('Splash', SplashState, false)
-    this.state.start('Splash')
+    this.state.add('Splash', SplashState)
+    this.state.add('Game', GameState)
+
+    this.state.start('Game')
   }
 }
 
