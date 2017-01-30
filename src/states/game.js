@@ -2,7 +2,7 @@ import Phaser from 'phaser-ce'
 
 class GameState extends Phaser.State {
   preload() {
-    this.game.load.path = '../assets/'
+    this.game.load.path = 'assets/'
     this.game.load.image('bird', 'images/bird.png')
     this.game.load.image('pipe', 'images/pipe.png')
   }
