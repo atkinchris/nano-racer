@@ -1,4 +1,4 @@
-import Phaser from 'phaser-ce'
+import Phaser from 'phaser'
 
 import SplashState from '../states/splash'
 import GameState from '../states/game'

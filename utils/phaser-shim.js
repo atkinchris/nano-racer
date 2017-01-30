@@ -8,7 +8,7 @@ const loaders = [
   { test: /p2\.js/, loader: 'expose?p2' },
 ]
 
-const alias = { 'phaser-ce': phaser, pixi, p2 }
+const alias = { phaser, pixi, p2 }
 const noParse = [pixi, p2]
 
 module.exports = {

@@ -1,3 +1,10 @@
 {
-  "extends": "atkinchris"
+  "extends": "airbnb-base",
+  "rules": {    
+    "semi": ["error", "never"]
+  },
+  "settings": {
+    "import/core-modules": [ "phaser" ],
+    "import/resolver": "webpack"
+  }
 }
