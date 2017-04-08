@@ -4,36 +4,39 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const { loaders, alias, noParse } = require('./utils/phaser-shim')
+const { rules, alias, noParse } = require('./utils/phaser-shim')
 
 const paths = {
   SRC: path.resolve(__dirname, 'src'),
   DEST: path.resolve(__dirname, 'dist'),
 }
 
-module.exports = {
+const config = {
   entry: {
     main: paths.SRC,
   },
   output: {
     path: paths.DEST,
-    filename: 'assets/scripts/[name].[hash].js',
-    publicPath: '',
+    filename: '[name].[hash].js',
+    publicPath: '/',
   },
-  plugins: [
-    new HtmlWebpackPlugin({ template: 'src/index.html' }),
-    new CleanWebpackPlugin([paths.DEST]),
-    new CopyWebpackPlugin([{ from: 'assets', to: 'assets' }]),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.NoErrorsPlugin(),
-  ],
   module: {
     noParse,
-    loaders: [
-      ...loaders,
-      { test: /\.js$/, loader: 'babel', include: paths.SRC },
+    rules: [
+      ...rules,
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({ template: path.join(paths.SRC, 'index.html') }),
+    new CleanWebpackPlugin([paths.DEST]),
+    new CopyWebpackPlugin([{ from: 'assets', to: 'assets' }]),
+    new webpack.NoEmitOnErrorsPlugin(),
+  ],
   resolve: { alias },
   devServer: {
     historyApiFallback: true,
@@ -42,3 +45,5 @@ module.exports = {
   },
   devtool: 'source-map',
 }
+
+module.exports = config

@@ -3,11 +3,14 @@
     "browser": true
   },
   "extends": "airbnb-base",
-  "rules": {    
+  "rules": {
     "semi": ["error", "never"]
   },
   "settings": {
-    "import/core-modules": [ "phaser" ],
-    "import/resolver": "webpack"
+    "import/core-modules": [
+      "phaser",
+      "pixi",
+      "p2"
+    ],
   }
 }
