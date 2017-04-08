@@ -32,7 +32,7 @@ class GameState extends Phaser.State {
     this.game.physics.arcade.overlap(
       this.bird,
       this.pipes,
-      this.restartGame, null, this
+      this.restartGame, null, this,
     )
 
     if (this.bird.y < 0 || this.bird.y > 490) {

@@ -7,7 +7,8 @@
     "start": "webpack-dev-server",
     "build": "webpack",
     "stats": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json dist",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "lint": "eslint ."
   },
   "author": "Chris Atkin <atkinchris@gmail.com>",
   "license": "MIT",
