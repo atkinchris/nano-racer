@@ -1,4 +1,4 @@
-import Phaser from 'phaser-ce'
+import Phaser from 'phaser'
 
 class GameState extends Phaser.State {
   preload() {
