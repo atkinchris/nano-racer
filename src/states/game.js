@@ -13,33 +13,22 @@ class GameState extends Phaser.State {
 
     this.boat = this.game.add.sprite(100, 245, 'boat')
     this.game.physics.arcade.enable(this.boat)
-
-    this.boat.body.gravity.y = 0
-    const spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
-    spaceKey.onDown.add(this.jump, this)
-
-    this.score = 0
-    this.labelScore = this.game.add.text(20, 20, '0', {
-      font: '30px Arial', fill: '#ffffff',
-    })
   }
 
   update() {
-    if (this.boat.y < 0 || this.boat.y > 490) {
-      this.restartGame()
+    if (this.game.input.mousePointer.isDown) {
+      this.game.physics.arcade.moveToPointer(this.boat, 100)
+
+      if (Phaser.Rectangle.contains(this.boat.body, this.game.input.x, this.game.input.y)) {
+        this.boat.body.velocity.setTo(0, 0)
+      }
+    } else {
+      this.boat.body.velocity.setTo(0, 0)
     }
   }
 
   render() {
     this.game.debug.text(this.game.time.fps || '--', 2, 14, '#00ff00')
-  }
-
-  jump() {
-    this.boat.body.velocity.y = -100
-  }
-
-  restartGame() {
-    this.game.state.start('Game')
   }
 }
 
