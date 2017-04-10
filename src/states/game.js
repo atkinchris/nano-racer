@@ -7,23 +7,39 @@ class GameState extends Phaser.State {
   }
 
   create() {
-    this.game.time.advancedTiming = true
-    this.game.stage.backgroundColor = '#71c5cf'
-    this.game.physics.startSystem(Phaser.Physics.ARCADE)
+    const { game } = this
 
-    this.boat = this.game.add.sprite(100, 245, 'boat')
-    this.game.physics.arcade.enable(this.boat)
+    this.cursors = game.input.keyboard.createCursorKeys()
+
+    game.stage.backgroundColor = '#71c5cf'
+    game.physics.startSystem(Phaser.Physics.P2JS)
+    game.time.advancedTiming = true
+
+    const boat = game.add.sprite(100, 100, 'boat')
+
+    game.physics.p2.enable(boat)
+
+    this.boat = boat
+    window.boat = boat
   }
 
   update() {
-    if (this.game.input.mousePointer.isDown) {
-      this.game.physics.arcade.moveToPointer(this.boat, 100)
+    const { boat, cursors } = this
 
-      if (Phaser.Rectangle.contains(this.boat.body, this.game.input.x, this.game.input.y)) {
-        this.boat.body.velocity.setTo(0, 0)
-      }
+    // console.log(new Phaser.Point(boat.body.data.velocity[0], boat.body.data.velocity[1]).getMagnitude())
+
+    if (cursors.left.isDown) {
+      boat.body.applyImpulse([1, 0])
+    } else if (cursors.right.isDown) {
+      boat.body.applyImpulse([-1, 0])
     } else {
-      this.boat.body.velocity.setTo(0, 0)
+      boat.body.setZeroRotation()
+    }
+
+    if (cursors.up.isDown) {
+      boat.body.applyImpulse([0, 1])
+    } else if (cursors.down.isDown) {
+      boat.body.applyImpulse([0, -1])
     }
   }
 
