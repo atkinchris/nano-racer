@@ -14,7 +14,7 @@ class GameState extends Phaser.State {
     game.stage.backgroundColor = '#71c5cf'
     game.physics.startSystem(Phaser.Physics.P2JS)
     game.time.advancedTiming = true
-    game.world.setBounds(0, 0, 3000, 3000)
+    game.world.setBounds(0, 0, game.width, game.height)
 
     const boat = new Boat({
       game: this,
