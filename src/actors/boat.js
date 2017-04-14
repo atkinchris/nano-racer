@@ -1,4 +1,4 @@
-import { Sprite } from 'phaser'
+import { Sprite, KeyCode } from 'phaser'
 
 const increase = (number, amount) => {
   const multiplier = number < 0 ? -1 : 1
@@ -23,9 +23,12 @@ class Boat extends Sprite {
   }
 
   update() {
-    if (this.cursors.up.isDown && this.velocity <= 400) {
+    const { keyboard } = this.game.input
+    const { W, A, S, D } = KeyCode
+
+    if (keyboard.isDown(W) && this.velocity <= 400) {
       this.velocity += 7
-    } else if (this.cursors.down.isDown && this.velocity >= -400) {
+    } else if (keyboard.isDown(S) && this.velocity >= -400) {
       this.velocity -= 7
     } else {
       this.velocity = increase(this.velocity, -7)
@@ -34,9 +37,9 @@ class Boat extends Sprite {
     this.body.velocity.x = this.velocity * Math.cos((this.angle - 90) * 0.01745)
     this.body.velocity.y = this.velocity * Math.sin((this.angle - 90) * 0.01745)
 
-    if (this.cursors.left.isDown) {
+    if (keyboard.isDown(A)) {
       this.body.angularVelocity = -1 * this.turningSpeed * (this.velocity / 1000)
-    } else if (this.cursors.right.isDown) {
+    } else if (keyboard.isDown(D)) {
       this.body.angularVelocity = this.turningSpeed * (this.velocity / 1000)
     } else {
       this.body.angularVelocity = 0
