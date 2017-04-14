@@ -15,6 +15,8 @@ class Boat extends Sprite {
     this.velocity = 0
     this.angularVelocity = 0
     this.turningSpeed = 8
+    this.acceleration = 4
+    this.maxSpeed = 200
   }
 
   initialize() {
@@ -26,12 +28,12 @@ class Boat extends Sprite {
     const { keyboard } = this.game.input
     const { W, A, S, D } = KeyCode
 
-    if (keyboard.isDown(W) && this.velocity <= 400) {
-      this.velocity += 7
-    } else if (keyboard.isDown(S) && this.velocity >= -400) {
-      this.velocity -= 7
+    if (keyboard.isDown(W) && this.velocity <= this.maxSpeed) {
+      this.velocity += this.acceleration
+    } else if (keyboard.isDown(S) && this.velocity >= -this.maxSpeed) {
+      this.velocity -= this.acceleration
     } else {
-      this.velocity = increase(this.velocity, -7)
+      this.velocity = increase(this.velocity, -this.acceleration)
     }
 
     this.body.velocity.x = this.velocity * Math.cos((this.angle - 90) * 0.01745)
