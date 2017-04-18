@@ -1,6 +1,6 @@
 import { State } from 'phaser'
 import inputFactory from '../components/input'
-import { LEFT, RIGHT, UP, DOWN } from '../constants'
+import { directionToVector } from '../utils/directions'
 
 class GameState extends State {
   preload() {
@@ -40,16 +40,10 @@ class GameState extends State {
     const dt = this.time.physicsElapsed
 
     const direction = this.getDirection(this.cursors)
+    const heading = directionToVector(direction)
 
-    if (direction === LEFT) {
-      this.pacman.x -= dt * speed
-    } else if (direction === RIGHT) {
-      this.pacman.x += dt * speed
-    } else if (direction === UP) {
-      this.pacman.y -= dt * speed
-    } else if (direction === DOWN) {
-      this.pacman.y += dt * speed
-    }
+    this.pacman.x += dt * speed * heading.x
+    this.pacman.y += dt * speed * heading.y
   }
 
   render() {

@@ -1,4 +1,4 @@
-import { NONE, LEFT, RIGHT, UP, DOWN } from '../constants'
+import { NONE, LEFT, RIGHT, UP, DOWN } from '../utils/directions'
 
 function inputFactory() {
   let currentDirection = NONE

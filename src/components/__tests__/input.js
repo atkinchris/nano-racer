@@ -1,4 +1,4 @@
-import { LEFT, UP } from '../../constants'
+import { LEFT, UP } from '../../utils/directions'
 import inputFactory from '../input'
 
 describe('input', () => {
