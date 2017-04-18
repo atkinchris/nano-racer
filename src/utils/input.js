@@ -1,9 +1,9 @@
 import { NONE, LEFT, RIGHT, UP, DOWN } from '../utils/directions'
 
-function inputFactory() {
+function inputHandler() {
   let currentDirection = NONE
 
-  const getDirection = (cursors) => {
+  return (cursors) => {
     const {
       left = {},
       right = {},
@@ -23,8 +23,6 @@ function inputFactory() {
 
     return currentDirection
   }
-
-  return { getDirection }
 }
 
-export default inputFactory
+export default inputHandler

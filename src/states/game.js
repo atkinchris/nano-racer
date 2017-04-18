@@ -1,6 +1,5 @@
 import { State } from 'phaser'
-import inputFactory from '../components/input'
-import { directionToVector } from '../utils/directions'
+import Player from '../actors/Player'
 
 class GameState extends State {
   preload() {
@@ -19,11 +18,14 @@ class GameState extends State {
   }
 
   create() {
-    this.pacman = this.add.sprite(32 + 16, 32 + 16, 'pacman', 2)
-    this.pacman.anchor.set(0.5)
+    const player = new Player({
+      game: this.game,
+      x: 32 + 16,
+      y: 32 + 16,
+      asset: 'pacman',
+    })
 
-    this.cursors = this.input.keyboard.createCursorKeys()
-    this.getDirection = inputFactory().getDirection
+    this.add.existing(player)
 
     this.map.forEach((row, y) => {
       row.forEach((tile, x) => {
@@ -33,17 +35,6 @@ class GameState extends State {
         }
       })
     })
-  }
-
-  update() {
-    const speed = 50
-    const dt = this.time.physicsElapsed
-
-    const direction = this.getDirection(this.cursors)
-    const heading = directionToVector(direction)
-
-    this.pacman.x += dt * speed * heading.x
-    this.pacman.y += dt * speed * heading.y
   }
 
   render() {
